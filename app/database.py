@@ -17,7 +17,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, Asyn
 from sqlalchemy.orm import DeclarativeBase
 
 # Строка подключения для SQLite
-DATABASE_URL = "postgresql+asyncpg://ecommerce_user:mJLOq!wESG0&ed6!Krn&P07z@127.0.0.1:5432/ecommerce_db"
+DATABASE_URL = "postgresql+asyncpg://user:pass@127.0.0.1:5432/db"
 
 # Создаём Engine
 async_engine = create_async_engine(DATABASE_URL, echo=True)
