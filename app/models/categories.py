@@ -1,12 +1,9 @@
-from typing import TYPE_CHECKING, Optional
-
+from typing import Optional
 from sqlalchemy import String, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import ForeignKey
 
 from app.database import Base
-if TYPE_CHECKING:
-    from .products import Product
 
 
 class Category(Base):
@@ -18,9 +15,15 @@ class Category(Base):
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
 
     products: Mapped[list["Product"]] = relationship("Product", back_populates="category")
-    
+
+
     parent: Mapped[Optional["Category"]] = relationship("Category",
                                                         back_populates="children",
                                                         remote_side="Category.id")
     children: Mapped[list["Category"]] = relationship("Category",
                                                       back_populates="parent")
+
+
+if __name__ == "__main__":
+    from sqlalchemy.schema import CreateTable
+    print(CreateTable(Category.__table__))
